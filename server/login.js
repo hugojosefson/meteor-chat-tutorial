@@ -6,5 +6,9 @@ Accounts.validateLoginAttempt(function (attempt) {
         && attempt.user.services
         && attempt.user.services.google
         && attempt.user.services.google.email
+        && (
+        attempt.user.services.google.email === 'hugo@josefson.org'
+        || attempt.user.services.google.email === 'maria.kristina@josefson.org'
+        )
         );
 });
