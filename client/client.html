@@ -5,38 +5,63 @@
 <body>
 {{loginButtons align="right"}}<br>
 
-<h1>Privatbok</h1>
 {{#if currentUser}}
-    {{> input }}
-    {{> messages }}
+{{> input }}
+{{> messages }}
 {{else}}
-    {{> welcome }}
+{{> welcome }}
 {{/if}}
 </body>
 
 <template name="welcome">
-    <p>
-        Välkommen till Privatbok!
-    </p>
+    <div class="hero-unit">
+        <div class="container">
+            <h1>Privatbok</h1>
+
+            <h2>Välkommen till Privatbok!</h2>
+
+        </div>
+    </div>
 </template>
 
 <template name="messages">
     {{#each messages}}
-    <div class="message">
-        <span class="author">
+    <blockquote>
+        <div class="alert alert-info">
+
             <img src="{{author.picture}}"/>
-            {{author.name}}:
-        </span>
-        {{message}}
-        <span class="time">{{humanizeTime time}}</span>
-        <br>
-    </div>
+            {{#if isOwnMessage}}
+            <button type="button" class="close" data-message-id="{{_id}}">&times;</button>
+            {{/if}}
+            <div style="display: inline-block">
+                <strong>{{author.name}}</strong>
+
+                <br/>
+                {{message}}
+                <footer>
+                    <small>{{humanizeTime time}}</small>
+                </footer>
+            </div>
+        </div>
+    </blockquote>
     {{/each}}
 </template>
 
 <template name="input">
-    <p class="input">
-        Vad tänker du på? <br/>
-        <input type="text" id="message">
-    </p>
+    <p>&nbsp;</p>
+
+    <div class="alert alert-info">
+        <form name="input" class="form" role="form">
+            <div class="control-group">
+                <img src="{{currentUser.services.google.picture}}"/>
+            </div>
+
+            <div class="control-group">
+                <label for="message" class="control-label">{{currentUser.services.google.given_name}}, vad tänker du
+                    på?</label>
+                <input type="text" id="message" class="form-control input-xxlarge" placeholder="just nu...">
+            </div>
+            <button type="submit" class="btn btn-primary form-control">Skicka</button>
+        </form>
+    </div>
 </template>

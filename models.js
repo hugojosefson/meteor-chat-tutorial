@@ -4,6 +4,7 @@
 
 Messages = new Meteor.Collection('messages', {
     transform: function (message) {
+        message.isOwnMessage = isOwnMessage(Meteor.userId(), message);
         message.author = {
             id: message.authorId
         };
@@ -15,8 +16,12 @@ Messages = new Meteor.Collection('messages', {
         return message;
     }
 });
+
+function isOwnMessage(userId, message) {
+    return userId === message.authorId;
+}
+
 Messages.allow({
-    insert: function (userId, message) {
-        return userId === message.authorId;
-    }
+    insert: isOwnMessage,
+    remove: isOwnMessage
 });
