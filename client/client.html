@@ -5,11 +5,15 @@
 <body>
 {{loginButtons align="right"}}<br>
 
+{{#if loggingIn}}
+{{> loggingIn}}
+{{else}}
 {{#if currentUser}}
 {{> input }}
 {{> messages }}
 {{else}}
 {{> welcome }}
+{{/if}}
 {{/if}}
 </body>
 
@@ -19,6 +23,19 @@
             <h1>Privatbok</h1>
 
             <h2>Välkommen till Privatbok!</h2>
+
+            <p>Logga in uppe till höger.</p>
+
+        </div>
+    </div>
+</template>
+
+<template name="loggingIn">
+    <div class="hero-unit">
+        <div class="container">
+            <h1>Privatbok</h1>
+
+            <h2>Laddar...</h2>
 
         </div>
     </div>
