@@ -10,7 +10,7 @@ Meteor.setInterval(function() {
 }, 1000);
 
 Template.messages.humanizeTime = function (time) {
-    return moment(time).from(Session.get('now'));
+    return moment(time).lang('sv').from(Session.get('now'));
 };
 
 function deleteMessage(event) {
