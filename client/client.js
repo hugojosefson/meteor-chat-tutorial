@@ -32,7 +32,6 @@ function sendMessage() {
             time: Date.now()
         });
 
-        document.getElementById('message').value = '';
         message.value = '';
     }
 }
