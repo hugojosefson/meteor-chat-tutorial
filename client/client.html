@@ -6,9 +6,12 @@
 {{loginButtons align="right"}}<br>
 
 <h1>Privatbok</h1>
-{{> welcome }}
-{{> input }}
-{{> messages }}
+{{#if currentUser}}
+    {{> input }}
+    {{> messages }}
+{{else}}
+    {{> welcome }}
+{{/if}}
 </body>
 
 <template name="welcome">
@@ -29,5 +32,8 @@
 </template>
 
 <template name="input">
-    <p>Message: <input type="text" id="message"></p>
+    <p class="input">
+        Vad tänker du på? <br/>
+        <input type="text" id="message">
+    </p>
 </template>
