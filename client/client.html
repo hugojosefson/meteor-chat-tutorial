@@ -19,7 +19,12 @@
 
 <template name="messages">
     {{#each messages}}
-    <strong>{{name}}:</strong> {{message}}<br>
+    <div class="message">
+        <span class="author">
+            <img src="{{author.picture}}"/>
+            {{author.name}}:
+        </span> {{message}}<br>
+    </div>
     {{/each}}
 </template>
 

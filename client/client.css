@@ -6,3 +6,11 @@ html {
 .login-buttons-dropdown-align-right {
     float: right;
 }
+
+.message .author img {
+    height: 75px;
+}
+
+.message .author {
+    font-weight: bold;
+}
