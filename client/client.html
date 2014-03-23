@@ -26,7 +26,10 @@
         <span class="author">
             <img src="{{author.picture}}"/>
             {{author.name}}:
-        </span> {{message}}<br>
+        </span>
+        {{message}}
+        <span class="time">{{humanizeTime time}}</span>
+        <br>
     </div>
     {{/each}}
 </template>

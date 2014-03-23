@@ -5,6 +5,9 @@ Template.messages.messages = function () {
     return Messages.find({}, { sort: { time: -1 }});
 };
 
+Template.messages.humanizeTime = function (time) {
+    return moment(time).fromNow();
+};
 
 Template.input.events = {
     'keydown input#message': function (event) {
