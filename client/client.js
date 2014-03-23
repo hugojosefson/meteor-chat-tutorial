@@ -10,10 +10,11 @@ Template.input.events = {
     'keydown input#message': function (event) {
         if (event.which === 13) { // 13 is the enter key event
             var message = document.getElementById('message');
+            var user = Meteor.user();
 
-            if (message.value !== '') {
+            if (user && message.value !== '') {
                 Messages.insert({
-                    authorId: Meteor.user()._id,
+                    authorId: user._id,
                     message: message.value,
                     time: Date.now()
                 });
