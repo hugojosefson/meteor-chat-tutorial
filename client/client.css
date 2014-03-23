@@ -2,14 +2,12 @@
     float: right;
 }
 
-img {
-    height: 50px;
-    vertical-align: top;
-}
-
 .alert {
     vertical-align: top;
 }
-.alert strong {
+
+.alert img {
     vertical-align: top;
+    height: 50px;
 }
+
