@@ -5,8 +5,12 @@ Template.messages.messages = function () {
     return Messages.find({}, { sort: { time: -1 }});
 };
 
+Meteor.setInterval(function() {
+    Session.set('now', Date.now());
+}, 1000);
+
 Template.messages.humanizeTime = function (time) {
-    return moment(time).fromNow();
+    return moment(time).from(Session.get('now'));
 };
 
 function deleteMessage(event) {
