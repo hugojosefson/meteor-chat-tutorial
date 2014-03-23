@@ -35,6 +35,7 @@ function sendMessage() {
         message.value = '';
     }
 
+    message.focus();
     return false;
 }
 
