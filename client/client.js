@@ -34,6 +34,8 @@ function sendMessage() {
 
         message.value = '';
     }
+
+    return false;
 }
 
 Template.input.events = {
