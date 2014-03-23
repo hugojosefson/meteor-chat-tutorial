@@ -4,12 +4,13 @@
 </head>
 
 <body>
-{{loginButtons align="right"}}<br>
+{{loginButtons align="right"}}
 
 {{#if loggingIn}}
 {{> loggingIn}}
 {{else}}
 {{#if currentUser}}
+{{> logo}}
 {{> input }}
 {{> messages }}
 {{else}}
@@ -18,8 +19,15 @@
 {{/if}}
 </body>
 
+<template name="logo">
+    <img class="logo" src="/favicon.ico"/>
+</template>
+
 <template name="welcome">
+    <br/>
+    <br/>
     <div class="hero-unit">
+        {{> logo}}
         <div class="container">
             <h1>Privatbok</h1>
 
@@ -30,7 +38,10 @@
 </template>
 
 <template name="loggingIn">
+    <br/>
+    <br/>
     <div class="hero-unit">
+        {{> logo}}
         <div class="container">
             <h1>Privatbok</h1>
 

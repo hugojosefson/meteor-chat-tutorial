@@ -2,6 +2,20 @@
     float: right;
 }
 
+img.logo {
+    float: left;
+    position: absolute;
+    top: 0.6em;
+    left: 0.5em;
+    height: 2.5em;
+}
+
+.hero-unit img.logo {
+    top: 0.5em;
+    left: 0.5em;
+    height: 5em;
+}
+
 .alert {
     vertical-align: top;
 }
