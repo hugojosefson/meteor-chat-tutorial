@@ -10,7 +10,7 @@ Meteor.publish('userData', function () {
             {},
             {
                 fields: {
-                    'services.google.name': 1,
+                    'services.google.given_name': 1,
                     'services.google.picture': 1
                 }
             }
