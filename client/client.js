@@ -5,7 +5,7 @@ Template.messages.messages = function () {
     return Messages.find({}, { sort: { time: -1 }});
 };
 
-Meteor.setInterval(function() {
+Meteor.setInterval(function () {
     Session.set('now', Date.now());
 }, 1000);
 
@@ -34,15 +34,39 @@ function sendMessage() {
 
         message.value = '';
     }
+}
 
-    return false;
+function saveDraftMessage() {
+    var message = document.getElementById('message');
+    UserSession.set('draftMessage', message.value);
+}
+
+function loadDraftMessage() {
+    var message = UserSession.get('draftMessage');
+    document.getElementById('message').value = message == null ? '' : message;
+}
+
+function discardDraftMessage() {
+    UserSession.delete('draftMessage');
 }
 
 Template.input.events = {
     'keydown input#message': function (event) {
         if (event.which === 13) { // 13 is the enter key event
             sendMessage();
+            discardDraftMessage();
+            return false;
+        } else {
+            saveDraftMessage();
         }
     },
-    'click button.btn-primary': sendMessage
+    'click button.btn-primary': function () {
+        sendMessage();
+        discardDraftMessage();
+        return false;
+    }
+};
+
+Template.input.rendered = function () {
+    loadDraftMessage();
 };
