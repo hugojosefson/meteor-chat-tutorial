@@ -9,3 +9,4 @@ standard-app-packages
 accounts-google
 moment
 bootstrap
+force-ssl
