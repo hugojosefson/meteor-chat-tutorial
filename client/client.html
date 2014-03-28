@@ -1,0 +1,95 @@
+<head>
+    <title>Privatbok</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <script src="/moment-langs.min.js"></script>
+</head>
+
+<body>
+{{loginButtons align="right"}}
+
+{{#if loggingIn}}
+{{> loggingIn}}
+{{else}}
+{{#if currentUser}}
+{{> logo}}
+{{> input }}
+{{> messages }}
+{{else}}
+{{> welcome }}
+{{/if}}
+{{/if}}
+</body>
+
+<template name="logo">
+    <img class="logo" src="/favicon.ico"/>
+</template>
+
+<template name="welcome">
+    <br/>
+    <br/>
+    <div class="hero-unit">
+        {{> logo}}
+        <div class="container">
+            <h1>Privatbok</h1>
+
+            <p>Logga in uppe till höger.</p>
+
+        </div>
+    </div>
+</template>
+
+<template name="loggingIn">
+    <br/>
+    <br/>
+    <div class="hero-unit">
+        {{> logo}}
+        <div class="container">
+            <h1>Privatbok</h1>
+
+            <h2>Laddar...</h2>
+
+        </div>
+    </div>
+</template>
+
+<template name="messages">
+    {{#each messages}}
+    <blockquote>
+        <div class="alert alert-info">
+
+            <img src="{{author.picture}}"/>
+            {{#if isOwnMessage}}
+            <button type="button" class="close" data-message-id="{{_id}}">&times;</button>
+            {{/if}}
+            <div style="display: inline-block">
+                <strong>{{author.name}}</strong>
+
+                <br/>
+                {{message}}
+                <footer>
+                    <small>{{humanizeTime time}}</small>
+                </footer>
+            </div>
+        </div>
+    </blockquote>
+    {{/each}}
+</template>
+
+<template name="input">
+    <p>&nbsp;</p>
+
+    <div class="alert alert-info">
+        <form name="input" class="form" role="form">
+            <div class="control-group">
+                <img src="{{currentUser.services.google.picture}}"/>
+            </div>
+
+            <div class="control-group">
+                <label for="message" class="control-label">{{currentUser.services.google.given_name}}, vad tänker du
+                    på?</label>
+                <input type="text" id="message" class="form-control input-xxlarge" placeholder="just nu...">
+            </div>
+            <button type="submit" class="btn btn-primary form-control">Skicka</button>
+        </form>
+    </div>
+</template>
