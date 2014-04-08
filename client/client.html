@@ -5,7 +5,8 @@
 </head>
 
 <body>
-{{loginButtons align="right"}}
+
+{{> android}}
 
 {{#if loggingIn}}
 {{> loggingIn}}
@@ -22,6 +23,14 @@
 
 <template name="logo">
     <img class="logo" src="/favicon.ico"/>
+</template>
+
+<template name="android">
+    {{#if android}}
+    <h2 align="right"><a href="" id="login-android">Logga in</a></h2>
+    {{else}}
+    {{loginButtons align="right"}}
+    {{/if}}
 </template>
 
 <template name="welcome">

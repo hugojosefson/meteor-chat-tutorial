@@ -70,3 +70,21 @@ Template.input.events = {
 Template.input.rendered = function () {
     loadDraftMessage();
 };
+
+Template.android.android = function () {
+    return typeof android !== 'undefined';
+};
+
+Template.android.events = {
+    'click #login-android': function(event){
+        android.obtainGoogleAccessToken('accessTokenCallback');
+        return false;
+    }
+};
+Template.android.rendered = function () {
+    if (typeof android !== 'undefined') {
+        window.accessTokenCallback = function accessTokenCallback(accessToken) {
+            window.alert('Access token from Java: ' + accessToken);
+        };
+    }
+};
