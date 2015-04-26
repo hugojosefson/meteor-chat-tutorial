@@ -1,25 +1,25 @@
 /**
  * Templates
  */
-Template.messages.messages = function () {
-    return Messages.find({}, { sort: { time: -1 }});
-};
+Template.messages.helpers({
+    messages: function () {
+        return Messages.find({}, {sort: {time: -1}});
+    },
+    humanizeTime: function (time) {
+        return moment(time).locale('sv').from(Session.get('now'));
+    },
+    events: {
+        'click button.close': deleteMessage
+    }
+});
 
 Meteor.setInterval(function () {
     Session.set('now', Date.now());
 }, 1000);
 
-Template.messages.humanizeTime = function (time) {
-    return moment(time).lang('sv').from(Session.get('now'));
-};
-
 function deleteMessage(event) {
     Messages.remove({_id: event.target.dataset.messageId});
 }
-
-Template.messages.events = {
-    'click button.close': deleteMessage
-};
 
 function sendMessage() {
     var message = document.getElementById('message');
@@ -50,41 +50,44 @@ function discardDraftMessage() {
     UserSession.delete('draftMessage');
 }
 
-Template.input.events = {
-    'keydown input#message': function (event) {
-        if (event.which === 13) { // 13 is the enter key event
+Template.input.helpers({
+    events: {
+        'keydown input#message': function (event) {
+            if (event.which === 13) { // 13 is the enter key event
+                sendMessage();
+                discardDraftMessage();
+                return false;
+            } else {
+                saveDraftMessage();
+            }
+        },
+        'click button.btn-primary': function () {
             sendMessage();
             discardDraftMessage();
             return false;
-        } else {
-            saveDraftMessage();
         }
     },
-    'click button.btn-primary': function () {
-        sendMessage();
-        discardDraftMessage();
-        return false;
+    rendered: function () {
+        loadDraftMessage();
     }
-};
+});
 
-Template.input.rendered = function () {
-    loadDraftMessage();
-};
 
-Template.android.android = function () {
-    return typeof android !== 'undefined';
-};
-
-Template.android.events = {
-    'click #login-android': function(event){
-        android.obtainGoogleAccessToken('accessTokenCallback');
-        return false;
+Template.android.helpers({
+    android: function () {
+        return typeof android !== 'undefined';
+    },
+    events: {
+        'click #login-android': function (event) {
+            android.obtainGoogleAccessToken('accessTokenCallback');
+            return false;
+        }
+    },
+    rendered: function () {
+        if (typeof android !== 'undefined') {
+            window.accessTokenCallback = function accessTokenCallback(accessToken) {
+                window.alert('Access token from Java: ' + accessToken);
+            };
+        }
     }
-};
-Template.android.rendered = function () {
-    if (typeof android !== 'undefined') {
-        window.accessTokenCallback = function accessTokenCallback(accessToken) {
-            window.alert('Access token from Java: ' + accessToken);
-        };
-    }
-};
+});

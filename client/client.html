@@ -1,7 +1,6 @@
 <head>
     <title>Privatbok</title>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
-    <script src="/moment-langs.min.js"></script>
 </head>
 
 <body>
@@ -29,7 +28,7 @@
     {{#if android}}
     <h2 align="right"><a href="" id="login-android">Logga in</a></h2>
     {{else}}
-    {{loginButtons align="right"}}
+    {{>loginButtons align="right"}}
     {{/if}}
 </template>
 

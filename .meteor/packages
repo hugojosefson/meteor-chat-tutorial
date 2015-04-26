@@ -7,3 +7,5 @@ accounts-ui
 standard-app-packages
 accounts-google
 bootstrap
+rzymek:moment
+rzymek:moment-locales
